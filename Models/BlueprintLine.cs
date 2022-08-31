@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EveIndustryTool.Data
+namespace EveIndustryTool.Models
 {
     public class BlueprintLine
     {
@@ -11,9 +11,9 @@ namespace EveIndustryTool.Data
 
         public BlueprintLine(int type, int activty, int materialType, int quantity)
         {
-            this.typeID = type;
-            this.activityID = activty;
-            this.materialTypeID = materialType;
+            typeID = type;
+            activityID = activty;
+            materialTypeID = materialType;
             this.quantity = quantity;
         }
     }

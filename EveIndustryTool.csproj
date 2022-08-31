@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MillimanDesignSystem" Version="0.2.0-Alpha.1" />
+  </ItemGroup>
+
 </Project>

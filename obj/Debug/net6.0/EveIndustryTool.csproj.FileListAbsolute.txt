@@ -25,3 +25,5 @@ C:\Users\Daniel.Buis\repos\EveIndustryTool\obj\Debug\net6.0\refint\EveIndustryTo
 C:\Users\Daniel.Buis\repos\EveIndustryTool\obj\Debug\net6.0\EveIndustryTool.pdb
 C:\Users\Daniel.Buis\repos\EveIndustryTool\obj\Debug\net6.0\EveIndustryTool.genruntimeconfig.cache
 C:\Users\Daniel.Buis\repos\EveIndustryTool\obj\Debug\net6.0\ref\EveIndustryTool.dll
+C:\Users\Daniel.Buis\repos\EveIndustryTool\bin\Debug\net6.0\MillimanDesignSystem.dll
+C:\Users\Daniel.Buis\repos\EveIndustryTool\obj\Debug\net6.0\EveIndustryTool.csproj.CopyComplete

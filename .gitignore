@@ -1,0 +1,6 @@
+
+*.vsidx
+*.lock
+*.v2
+*.v5
+*.dll

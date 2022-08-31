@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EveIndustryTool.Data
+namespace EveIndustryTool.Models
 {
     public class Item
     {
@@ -14,13 +14,13 @@ namespace EveIndustryTool.Data
 
         public Item(int type, int group, string name, string mass, string volume, int portion, int graphics)
         {
-            this.typeID = type;
-            this.groupID = group;
+            typeID = type;
+            groupID = group;
             this.name = name;
             this.mass = mass;
             this.volume = volume;
             this.portion = portion;
-            this.graphicID = graphics;
+            graphicID = graphics;
         }
     }
 }
