@@ -12,13 +12,16 @@
         <td>Ingredient</td>
         <td>Quantity</td>
     </thead>
-    @foreach (BlueprintLine line in StaticData.BlueprintLines)
+    @foreach (int id in StaticData.Blueprints.Keys)
     {
-        <tr>
-            <td>@StaticData.MapIntToItemName(line.typeID)</td>
-            <td>@StaticData.MapIntToItemName(line.materialTypeID)</td>
-            <td>@line.quantity</td>
-        </tr>
+        foreach (BlueprintLine line in StaticData.Blueprints[id])
+        {
+            <tr>
+                <td>@StaticData.MapIntToItemName(line.typeID)</td>
+                <td>@StaticData.MapIntToItemName(line.materialTypeID)</td>
+                <td>@line.quantity</td>
+            </tr>
+        }
     }
 </table>
 

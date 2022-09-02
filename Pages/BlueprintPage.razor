@@ -1,0 +1,20 @@
+﻿@page "/blueprint/{BlueprintName}"
+@using EveIndustryTool.Models;
+@using EveIndustryTool.Blocks
+@inject Data.StaticData StaticData
+<h3>BlueprintPage</h3>
+
+<Blueprint TypeID=BlueprintID />
+
+@code {
+    [Parameter]
+    public string BlueprintName { get; set; }
+
+    private int BlueprintID;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        BlueprintID = StaticData.MapItemNameToInt(BlueprintName);
+    }
+}

@@ -4,7 +4,7 @@ namespace EveIndustryTool.Data
 {
     public class StaticData
     {
-        public List<BlueprintLine> BlueprintLines { get; } = BuildBlueprintList();
+        public Dictionary<int, List<BlueprintLine>> Blueprints { get; } = BuildBlueprints();
 
         public Dictionary<int, Item> ItemData { get; } = BuildItemData();
 
@@ -19,6 +19,29 @@ namespace EveIndustryTool.Data
             {
                 return "Not Found : " + inputID;
             }
+        }
+
+        public int MapItemNameToInt(string name)
+        {
+            return ItemData.FirstOrDefault(x => x.Value.name.Equals(name)).Key;
+        }
+
+        private static Dictionary<int, List<BlueprintLine>> BuildBlueprints()
+        {
+            List<BlueprintLine> blueprintLines = BuildBlueprintList();
+            Dictionary<int, List<BlueprintLine>> blueprints = new Dictionary<int, List<BlueprintLine>>();
+
+            foreach (BlueprintLine line in blueprintLines){
+                if (blueprints.ContainsKey(line.typeID))
+                {
+                    blueprints[line.typeID].Add(line);
+                }
+                else
+                {
+                    blueprints[line.typeID] = new List<BlueprintLine> { line };
+                }
+            }
+            return blueprints;
         }
 
         private static List<BlueprintLine> BuildBlueprintList()

@@ -1,0 +1,32 @@
+﻿@inject Data.StaticData StaticData
+@using MillimanDesignSystem.Components
+@using Models
+
+<table>
+    <thead>
+    <td>Item</td>
+    <td>Ingredient</td>
+    <td>Quantity</td>
+    </thead>
+    @foreach (BlueprintLine line in blueprint)
+    {
+        <tr>
+            <td>@StaticData.MapIntToItemName(line.typeID)</td>
+            <td>@StaticData.MapIntToItemName(line.materialTypeID)</td>
+            <td>@line.quantity</td>
+        </tr>
+    }
+</table>
+
+@code {
+    [Parameter]
+    public int TypeID { get; set; }
+
+    private List<BlueprintLine> blueprint;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        blueprint = StaticData.Blueprints[TypeID];
+    }
+}
