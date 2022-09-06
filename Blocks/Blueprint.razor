@@ -2,16 +2,15 @@
 @using MillimanDesignSystem.Components
 @using Models
 
+<h2>@StaticData.MapIntToItemName(TypeID)</h2>
 <table>
     <thead>
-    <td>Item</td>
     <td>Ingredient</td>
     <td>Quantity</td>
     </thead>
     @foreach (BlueprintLine line in blueprint)
     {
         <tr>
-            <td>@StaticData.MapIntToItemName(line.typeID)</td>
             <td>@StaticData.MapIntToItemName(line.materialTypeID)</td>
             <td>@line.quantity</td>
         </tr>
