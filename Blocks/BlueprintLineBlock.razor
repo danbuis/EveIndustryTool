@@ -1,0 +1,65 @@
+﻿@inject Data.StaticData StaticData
+@using MillimanDesignSystem.Components
+@using Models
+
+<tr>
+    <td>@BuildButtonFragment()</td>
+    <td>@StaticData.MapIntToItemName(TypeID)</td>
+    <td>@Quantity</td>
+</tr>
+
+@code {
+    [Parameter]
+    public int TypeID { get; set; }
+
+    [Parameter]
+    public int Quantity { get; set; }
+
+    [Parameter]
+    public int ActivityId{ get; set; }
+
+    // figure out based on is there a [name] + reaction/blueprint
+    // do that in constructor
+    // store in private var
+
+    private ItemBuildType buildType;
+    private int correspondingBlueprintTypeId;
+
+    protected override void OnInitialized(){
+        base.OnInitialized();
+        string name = StaticData.MapIntToItemName(TypeID);
+        string blueprintName = name + " Blueprint";
+        string reactionName = name + " Reaction";
+
+        int blueprintId = StaticData.MapItemNameToInt(blueprintName);
+        int reactionId = StaticData.MapItemNameToInt(reactionName);
+        if( blueprintId != 0){
+            buildType = ItemBuildType.Blueprint;
+            correspondingBlueprintTypeId = blueprintId;
+        }
+        else if (reactionId != 0)
+        {
+            buildType = ItemBuildType.Reaction;
+            correspondingBlueprintTypeId = reactionId;
+        }
+        else
+        {
+            buildType = ItemBuildType.Raw;
+        }
+    }
+
+    private RenderFragment BuildButtonFragment(){
+        string buttonText;
+        bool disabled = false;
+        if (buildType != ItemBuildType.Raw)
+        {
+            buttonText = "Build myself";
+        }
+        else{
+            buttonText = "Raw material";
+            disabled = true;
+        }
+
+        return @<Button Disabled=disabled>@buttonText</Button>;
+    }
+}

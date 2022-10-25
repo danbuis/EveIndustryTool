@@ -5,15 +5,13 @@
 <h2>@StaticData.MapIntToItemName(TypeID)</h2>
 <table>
     <thead>
-    <td>Ingredient</td>
-    <td>Quantity</td>
+        <td></td>
+        <td>Ingredient</td>
+        <td>Quantity</td>
     </thead>
     @foreach (BlueprintLine line in blueprint)
     {
-        <tr>
-            <td>@StaticData.MapIntToItemName(line.materialTypeID)</td>
-            <td>@line.quantity</td>
-        </tr>
+        <BlueprintLineBlock TypeID=line.materialTypeID Quantity=line.quantity ActivityId=line.activityID/>
     }
 </table>
 
