@@ -2,11 +2,24 @@
 @using MillimanDesignSystem.Components
 @using Models
 
-<tr>
-    <td>@BuildButtonFragment()</td>
-    <td>@StaticData.MapIntToItemName(TypeID)</td>
-    <td>@Quantity</td>
-</tr>
+@if (buttonToggled){
+    <div>
+        <Button onclick=@HandleTypeButtonClick>Buy @StaticData.MapIntToItemName(TypeID)</Button>
+    </div>
+    @foreach (BlueprintLine line in BuildChildBlueprintLines())
+    {
+        
+        <BlueprintLineBlock ParentId=TypeID Child=true TypeID=line.materialTypeID Quantity=line.quantity*Quantity ActivityId=line.activityID />
+    }
+}
+else
+{
+    <tr>
+        <td>@BuildButtonFragment()</td>      
+        <td>@StaticData.MapIntToItemName(TypeID)</td>
+        <td>@Quantity</td>
+    </tr>
+}
 
 @code {
     [Parameter]
@@ -18,12 +31,19 @@
     [Parameter]
     public int ActivityId{ get; set; }
 
+    [Parameter]
+    public bool Child { get; set; } = false;
+
+    [Parameter]
+    public int ParentId { get; set; }
+
     // figure out based on is there a [name] + reaction/blueprint
     // do that in constructor
     // store in private var
 
     private ItemBuildType buildType;
     private int correspondingBlueprintTypeId;
+    private bool buttonToggled = false;
 
     protected override void OnInitialized(){
         base.OnInitialized();
@@ -51,15 +71,28 @@
     private RenderFragment BuildButtonFragment(){
         string buttonText;
         bool disabled = false;
-        if (buildType != ItemBuildType.Raw)
+        if (buildType == ItemBuildType.Blueprint)
         {
             buttonText = "Build myself";
+        }
+        else if (buildType == ItemBuildType.Reaction)
+        {
+            buttonText = "Reaction";
+            disabled = true;
         }
         else{
             buttonText = "Raw material";
             disabled = true;
         }
 
-        return @<Button Disabled=disabled>@buttonText</Button>;
+        return @<Button Disabled=disabled onclick=@HandleTypeButtonClick>@buttonText</Button>;
+    }
+
+    private void HandleTypeButtonClick(){
+        buttonToggled = !buttonToggled;
+    }
+
+    private List<BlueprintLine> BuildChildBlueprintLines(){
+        return StaticData.Blueprints[correspondingBlueprintTypeId];        
     }
 }
